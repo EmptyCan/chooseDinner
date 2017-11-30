@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>今天吃什么</title>
+	<style>
+		body{
+			text-align: center;
+			background: #000;
+		}
+		h1{
+			color: #fff;
+			
+			position: absolute;
+			font-weight: bold;
+			font-size: 102px;
+			letter-spacing: 8px;
+			top: 50%; 
+			left: 50%;
+			/* transform: translate(-50%,-50%) rotate(-10deg);; */
+		 
+			/* transform: rotate(30deg); */
+		}
+	</style>
+</head>
+<body>
+	<h1 class="target"></h1>
+	<button>开始</button>
+	<script src="https://code.jquery.com/jquery-2.0.3.js"></script>
+	<script>
+		var lock = 1;
+		var cont = 0;
+		var foodList = ['黄焖鸡','炒米饭','麻辣烫','炒面','刀削面']
+		$('button').on('click',function(){
+			
+			toggle();
+
+		})
+		function toggle(){
+			if(lock){
+				food = setInterval(function(){
+					var index = Math.round(Math.random()*10)
+					$('.target').text(foodList[index]);
+				},10)
+				$('button').text('就它了')
+				console.log('lock'+lock)
+				console.log('cont:'+cont)
+				lock = 0;
+				
+			}else{
+				
+				clearInterval(food);
+				$('button').text('不想吃，再一次')
+				console.log('lock'+lock)
+				console.log('cont:'+cont)
+				lock = 1;
+				cont++;
+			}
+			if(cont === 7){
+				$('button').attr('disabled',true)
+				$('.target').text('事er真多，别吃了')
+			}
+		}
+
+	</script>
+</body>
+</html>
